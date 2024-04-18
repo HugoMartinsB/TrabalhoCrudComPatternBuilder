@@ -14,9 +14,6 @@ import java.math.BigDecimal;
 @Entity
 @Table(name="Casas")
 public class Casa implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
     @Column(name="quatos_casa")
     public BigDecimal quartos;

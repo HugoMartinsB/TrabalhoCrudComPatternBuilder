@@ -1,9 +1,7 @@
 package com.finan.orcamento.service;
 
 import com.finan.orcamento.model.Casa;
-import com.finan.orcamento.model.UsuarioModel;
 import com.finan.orcamento.repositories.CasaRepository;
-import com.finan.orcamento.repositories.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,28 +11,20 @@ import java.util.Optional;
 @Service
 public class CasaService {
     @Autowired
-    private UsuarioRepository usuarioRepository;
+    private CasaRepository casaRepository;
 
-    public List<Casa> buscarUsuario(){
+    public List<Casa> buscarcasa(){
         return CasaRepository.findAll();
     }
 
-    public Casa buscaId(Long id){
-        Optional<Casa> obj=CasaRepository.findById(id);
-        if (obj.isPresent()) {
-            return obj.get();
-        } else {
-            throw new RuntimeException("Usuário não encontrado");
-        }
-    }
 
-    public UsuarioModel cadastrarUsuario(UsuarioModel usuarioModel){
-        return usuarioRepository.save(usuarioModel);
+    public Casa cadastrarCasa(Casa usuarioModel){
+        return CasaRepository.save(usuarioModel);
     }
 
 
-    public void deletaUsuario(Long id){
-        usuarioRepository.deleteById(id);
+    public void deletaCasa(Long id){
+        CasaRepository.deleteById(id);
     }
 }
 
