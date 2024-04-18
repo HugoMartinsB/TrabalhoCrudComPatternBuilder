@@ -10,21 +10,40 @@ import java.util.Optional;
 
 @Service
 public class CasaService {
+
     @Autowired
     private CasaRepository casaRepository;
 
-    public List<Casa> buscarcasa(){
-        return CasaRepository.findAll();
+    public List<Casa> buscarTodasCasas() {
+        return casaRepository.findAll();
     }
 
-
-    public Casa cadastrarCasa(Casa usuarioModel){
-        return CasaRepository.save(usuarioModel);
+    public Casa buscarCasaPorId(Long id) {
+        Optional<Casa> obj = casaRepository.findById(id);
+        if (obj.isPresent()) {
+            return obj.get();
+        } else {
+            throw new RuntimeException("Casa não encontrada");
+        }
     }
 
+    public Casa cadastrarCasa(Casa casa) {
+        return casaRepository.save(casa);
+    }
 
-    public void deletaCasa(Long id){
-        CasaRepository.deleteById(id);
+    public void deletarCasaPorId(Long id) {
+        casaRepository.deleteById(id);
+    }
+
+    public Casa atualizarCasa(Casa casa, Long id) {
+
+        Optional<Casa> casaOptional = casaRepository.findById(id);
+        if (casaOptional.isPresent()) {
+            Casa casaToUpdate = casaOptional.get();
+            casaToUpdate.setQuartos(casa.getQuartos());
+            return casaRepository.save(casaToUpdate);
+        } else {
+            throw new RuntimeException("Casa não encontrada para atualização");
+        }
     }
 }
-

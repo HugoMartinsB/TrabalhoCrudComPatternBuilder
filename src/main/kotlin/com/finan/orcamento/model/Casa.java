@@ -12,23 +12,21 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="Casas")
+@Table(name = "Casas")
 public class Casa implements Serializable {
 
-    @Column(name="quatos_casa")
-    public BigDecimal quartos;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @Column(name="banheiros_casa")
-    public BigDecimal banheiros;
+    @Column(name = "quartos_casa")
+    private BigDecimal quartos;
 
-    @Column(name="churrasqueiras_casa")
-    public BigDecimal churrasqueira;
+    @Column(name = "banheiros_casa")
+    private BigDecimal banheiros;
 
-    public Casa(int quartos, int banheiros, int churrasqueira){
-        this.banheiros = BigDecimal.valueOf(banheiros);
-        this.quartos = BigDecimal.valueOf(quartos);
-        this.churrasqueira = BigDecimal.valueOf(churrasqueira);
-    }
+    @Column(name = "churrasqueiras_casa")
+    private BigDecimal churrasqueira;
 
     public BigDecimal getQuartos() {
         return quartos;
@@ -38,8 +36,14 @@ public class Casa implements Serializable {
         return banheiros;
     }
 
-    public BigDecimal isChurrasqueira() {
-        return churrasqueira;
+    public boolean isChurrasqueira() {
+        return churrasqueira.compareTo(BigDecimal.ZERO) > 0;
+    }
+
+    public Casa(BigDecimal quartos, BigDecimal banheiros, BigDecimal churrasqueira) {
+        this.quartos = quartos;
+        this.banheiros = banheiros;
+        this.churrasqueira = churrasqueira;
     }
 
 }
