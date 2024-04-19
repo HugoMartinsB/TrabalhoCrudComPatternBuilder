@@ -36,14 +36,14 @@ public class Casa implements Serializable {
         return banheiros;
     }
 
-    public boolean isChurrasqueira() {
-        return churrasqueira.compareTo(BigDecimal.ZERO) > 0;
+    public BigDecimal getChurrasqueira() {
+        return churrasqueira;
     }
 
-    public Casa(BigDecimal quartos, BigDecimal banheiros, BigDecimal churrasqueira) {
-        this.quartos = quartos;
-        this.banheiros = banheiros;
-        this.churrasqueira = churrasqueira;
+    public Casa(int quartos, int banheiros, int churrasqueira) {
+        this.quartos = BigDecimal.valueOf(quartos);
+        this.banheiros = BigDecimal.valueOf(banheiros);
+        this.churrasqueira = BigDecimal.valueOf(churrasqueira);
     }
 
 }
